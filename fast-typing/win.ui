@@ -7,23 +7,23 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>315</height>
+    <height>325</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>800</width>
-    <height>315</height>
+    <height>325</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>800</width>
-    <height>315</height>
+    <height>325</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>win</string>
+   <string>Fast Typing Test</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -31,7 +31,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="hlayout_timer">
       <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
@@ -46,7 +46,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="label_timer">
         <property name="font">
          <font>
           <pointsize>18</pointsize>
@@ -76,7 +76,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="textEdit_output">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -88,6 +88,9 @@
         <width>16777215</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -116,7 +119,7 @@ p, li { white-space: pre-wrap; }
      </spacer>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="hlayout_input">
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -131,7 +134,7 @@ p, li { white-space: pre-wrap; }
        </spacer>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="lineEdit_input">
         <property name="font">
          <font>
           <pointsize>18</pointsize>
@@ -180,17 +183,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuPlay">
-    <property name="title">
-     <string>Play</string>
-    </property>
-    <addaction name="actionStart"/>
-    <addaction name="actionStop"/>
-    <addaction name="actionReset"/>
-    <addaction name="separator"/>
-    <addaction name="actionPause"/>
-    <addaction name="actionUnpause"/>
-   </widget>
    <widget class="QMenu" name="menuSample">
     <property name="title">
      <string>Sample</string>
@@ -207,7 +199,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionHelp_2"/>
    </widget>
    <addaction name="menuMenu"/>
-   <addaction name="menuPlay"/>
    <addaction name="menuSample"/>
    <addaction name="menuAbout"/>
   </widget>
@@ -226,30 +217,8 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>Quit</string>
    </property>
-  </action>
-  <action name="actionStart">
-   <property name="text">
-    <string>Start</string>
-   </property>
-  </action>
-  <action name="actionReset">
-   <property name="text">
-    <string>Reset</string>
-   </property>
-  </action>
-  <action name="actionPause">
-   <property name="text">
-    <string>Pause</string>
-   </property>
-  </action>
-  <action name="actionUnpause">
-   <property name="text">
-    <string>Unpause</string>
-   </property>
-  </action>
-  <action name="actionStop">
-   <property name="text">
-    <string>Stop</string>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionChoose_Default_Samples">
@@ -270,6 +239,9 @@ p, li { white-space: pre-wrap; }
   <action name="actionHelp_2">
    <property name="text">
     <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
  </widget>
