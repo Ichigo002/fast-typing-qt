@@ -15,6 +15,21 @@ public:
     win(QWidget *parent = nullptr);
     ~win();
 
+private slots:
+    void on_actionBest_Records_triggered();
+
+    void on_actionText_Settings_triggered();
+
+    void on_actionQuit_triggered();
+
+    void on_actionChoose_Default_Samples_triggered();
+
+    void on_actionLoad_Custom_Sample_triggered();
+
+    void on_actionHelp_triggered();
+
+    void on_actionHelp_2_triggered();
+
 private:
     Ui::win *ui;
 };

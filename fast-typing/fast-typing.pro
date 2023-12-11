@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    menu_actions.cpp \
     win.cpp
 
 HEADERS += \
