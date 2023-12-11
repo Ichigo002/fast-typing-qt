@@ -1,7 +1,7 @@
 #include "win.h"
 #include <QLabel>
 #include <QApplication>
-
+#include <QString>
 
 void win::on_actionBest_Records_triggered()
 {
@@ -23,27 +23,30 @@ void win::on_actionQuit_triggered()
 }
 
 
-void win::on_actionChoose_Default_Samples_triggered()
+void win::on_actionChoose_Sample_triggered()
 {
+    def_sample_dialog *defsam_dialog = new def_sample_dialog();
 
+    defsam_dialog->exec();
+
+    load_sample_file(defsam_dialog->get_chosen_file().filePath());
+    reset_game();
+    //qDebug() <<"result: "<< QString::number(result);
+    //qDebug() << "Filename: " << defsam_dialog->get_chosen_file();
+
+
+    delete defsam_dialog;
 }
-
-
-void win::on_actionLoad_Custom_Sample_triggered()
-{
-
-}
-
 
 void win::on_actionHelp_triggered()
 {
-
+    //new info dialog
 }
 
 
 void win::on_actionHelp_2_triggered()
 {
-
+    //new help dialog
 }
 
 

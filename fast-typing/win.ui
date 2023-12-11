@@ -179,17 +179,10 @@ p, li { white-space: pre-wrap; }
      <string>Menu</string>
     </property>
     <addaction name="actionBest_Records"/>
+    <addaction name="actionChoose_Sample"/>
     <addaction name="actionText_Settings"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
-   </widget>
-   <widget class="QMenu" name="menuSample">
-    <property name="title">
-     <string>Sample</string>
-    </property>
-    <addaction name="actionChoose_Default_Samples"/>
-    <addaction name="separator"/>
-    <addaction name="actionLoad_Custom_Sample"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -199,7 +192,6 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionHelp_2"/>
    </widget>
    <addaction name="menuMenu"/>
-   <addaction name="menuSample"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -221,16 +213,6 @@ p, li { white-space: pre-wrap; }
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionChoose_Default_Samples">
-   <property name="text">
-    <string>Choose Default Samples</string>
-   </property>
-  </action>
-  <action name="actionLoad_Custom_Sample">
-   <property name="text">
-    <string>Load Custom Sample</string>
-   </property>
-  </action>
   <action name="actionHelp">
    <property name="text">
     <string>Info</string>
@@ -242,6 +224,11 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionChoose_Sample">
+   <property name="text">
+    <string>Choose Sample</string>
    </property>
   </action>
  </widget>
