@@ -10,6 +10,7 @@ win::win(QWidget *parent)
     settings = new QSettings("settings.ini");
 
     output = findChild<QTextEdit*>("textEdit_output");
+    input  = findChild<QLineEdit*>("lineEdit_input");
 
     reset_game();
 }
@@ -44,6 +45,9 @@ void win::load_sample_file(const QString filename)
 void win::reset_game()
 {
     running_game = false;
+    prev_line_cword = 0;
+    scrolly = 0;
+    scroll_text_view(0);
 
     past_output = "";
 
@@ -54,7 +58,7 @@ void win::reset_game()
     cword_index = -1;
     refresh_text_view();
     cword_index = 0;
-    findChild<QLineEdit*>("lineEdit_input")->setText("");
+    input->setText("");
 
 }
 
@@ -96,6 +100,40 @@ void win::refresh_text_view()
     output->setText(buff);
 }
 
+void win::scroll_text_view(int v)
+{
+    QScrollBar * scb = output->verticalScrollBar();
+    //qDebug() << "maxv: " << scb->maximum();
+    scb->setValue(v);
+}
+
+void win::scroll_one_line()
+{
+    scrolly += scroll_factor;
+    scroll_text_view(scrolly);
+}
+
+bool win::is_cword_in_next_line()
+{
+    QFontMetrics font_metrics(output->font());
+
+    QString targetWords = "";
+
+    for(int i = prev_line_cword; i < cword_index; i++)
+    {
+        targetWords += sample_text_list[i] + " ";
+    }
+
+    int wordsWidth = font_metrics.horizontalAdvance(targetWords);
+    if((wordsWidth / text_viewport_width_px) >= 1)
+    {
+        prev_line_cword = cword_index-1;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void win::on_lineEdit_input_textChanged(const QString &arg1)
 {
     running_game = true;
@@ -109,7 +147,10 @@ void win::on_lineEdit_input_textChanged(const QString &arg1)
     set_cword_status(get_word(cword_index) + ' ' == arg1);
     cword_index++;
 
-    findChild<QLineEdit*>("lineEdit_input")->setText("");
+    //scroll_one_line();
+    qDebug() << "next word in this line?: " << is_cword_in_next_line();
+
+    input->setText("");
 }
 
 

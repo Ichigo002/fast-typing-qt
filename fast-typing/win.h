@@ -8,6 +8,8 @@
 #include <QTextStream>
 #include <QSettings>
 #include <QTextEdit>
+#include <QScrollBar>
+#include <QFontMetrics>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class win; }
@@ -45,6 +47,9 @@ private:
     QString get_word(int index);
     void set_cword_status(bool is_correct);
     void refresh_text_view();
+    void scroll_text_view(int v);
+    void scroll_one_line();
+    bool is_cword_in_next_line();
 
     Ui::win *ui;
     QString default_sample_dir = "samples";
@@ -54,11 +59,16 @@ private:
     QStringList sample_text_list; // list of each word in sample
     QString past_output; // html code coloring last correct or incorrect words.
     QTextEdit* output;
+    QLineEdit* input;
 
     QString color_correct = "green";
     QString color_incorrect = "red";
     QString color_standart = "white";
-    uint font_size_pt = 36;
+    uint font_size_pt =36;
+    int scrolly;
+    int scroll_factor = 55; // 36pt = 55px
+    int prev_line_cword; // used to scroll content
+    int text_viewport_width_px = 230; // do not change because you can break jumping to next line :)
 
 private:
     /*Settings section:*/
