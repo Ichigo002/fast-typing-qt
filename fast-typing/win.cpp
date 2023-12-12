@@ -147,8 +147,10 @@ void win::on_lineEdit_input_textChanged(const QString &arg1)
     set_cword_status(get_word(cword_index) + ' ' == arg1);
     cword_index++;
 
-    //scroll_one_line();
-    qDebug() << "next word in this line?: " << is_cword_in_next_line();
+    scroll_text_view(scrolly);
+
+    if(is_cword_in_next_line())
+        scroll_one_line();
 
     input->setText("");
 }
