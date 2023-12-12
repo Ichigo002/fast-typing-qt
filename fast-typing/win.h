@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "def_sample_dialog.h"
+#include "text_settings.h"
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
@@ -75,6 +76,9 @@ private:
     QSettings *settings;
 #define SETT_CURR_SAMPLE_FILE "current_sample_filename"
 
+#define SETT_CORR_COLOR "correct_text_color"
+#define SETT_INCORR_COLOR "incorrect_text_color"
+#define SETT_STD_COLOR "standard_text_color"
 
 };
 #endif // WIN_H

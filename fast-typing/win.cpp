@@ -59,6 +59,7 @@ void win::reset_game()
     refresh_text_view();
     cword_index = 0;
     input->setText("");
+    input->setPlaceholderText("Start Typing");
 
 }
 
@@ -137,6 +138,7 @@ bool win::is_cword_in_next_line()
 void win::on_lineEdit_input_textChanged(const QString &arg1)
 {
     running_game = true;
+    input->setPlaceholderText("");
 
     if(!arg1.contains(' '))
         return;
@@ -153,6 +155,11 @@ void win::on_lineEdit_input_textChanged(const QString &arg1)
         scroll_one_line();
 
     input->setText("");
+}
+
+void win::updateCountdown()
+{
+    qDebug() << "UPDATE";
 }
 
 

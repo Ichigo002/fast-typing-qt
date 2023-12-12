@@ -12,14 +12,17 @@ SOURCES += \
     def_sample_dialog.cpp \
     main.cpp \
     menu_actions.cpp \
+    text_settings.cpp \
     win.cpp
 
 HEADERS += \
     def_sample_dialog.h \
+    text_settings.h \
     win.h
 
 FORMS += \
     def_sample_dialog.ui \
+    text_settings.ui \
     win.ui
 
 TRANSLATIONS += \
