@@ -8,12 +8,16 @@ def_sample_dialog::def_sample_dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    load_all_samples("samples");
 }
 
 def_sample_dialog::~def_sample_dialog()
 {
     delete ui;
+}
+
+void def_sample_dialog::set_current_file(QString filename)
+{
+    curr_filename = filename;
 }
 
 QFileInfo def_sample_dialog::get_chosen_file()
@@ -41,6 +45,8 @@ void def_sample_dialog::load_all_samples(const QString dir_path)
     QListWidget *list_widget = findChild<QListWidget*>("listWidget");
 
     int i = 0;
+    QListWidgetItem *citem = nullptr;
+
     foreach (const QFileInfo &fileInfo, file_list)
     {
         //qDebug() << "File Name:" << fileInfo.fileName();
@@ -53,9 +59,16 @@ void def_sample_dialog::load_all_samples(const QString dir_path)
         item->setText(fileInfo.fileName());
         item->setData(Qt::UserRole, QVariant(i));
 
+        if(fileInfo.fileName() == curr_filename)
+            citem = item;
 
         list_widget->addItem(item);
         i++;
     }
+
+    if(citem)
+        list_widget->setCurrentItem(citem);
+    else
+        list_widget->setCurrentRow(0);
 }
 

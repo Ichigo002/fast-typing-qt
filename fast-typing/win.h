@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class win; }
@@ -37,11 +38,20 @@ private:
     void reset_text_view();
     void reset_game();
 
+    void load_settings();
+    void save_settings();
+
     // Change this later when you add QSettings!
     QString get_def_sample_filepath() { return "samples/default_sample.txt"; }
 
     Ui::win *ui;
     QString sample_txt;
+    QString default_sample_dir = "samples";
+
+
+    QSettings *settings;
+#define SETT_CURR_SAMPLE_FILE "current_sample_filename"
+
 
 };
 #endif // WIN_H

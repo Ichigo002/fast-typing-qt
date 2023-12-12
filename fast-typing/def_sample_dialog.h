@@ -20,7 +20,9 @@ public:
     explicit def_sample_dialog(QWidget *parent = nullptr);
     ~def_sample_dialog();
 
+    void set_current_file(QString filename);
     QFileInfo get_chosen_file();
+    void load_all_samples(const QString dir_path);
 
 private slots:
 
@@ -28,10 +30,10 @@ private slots:
 
 private:
 
-    void load_all_samples(const QString dir_path);
 
     Ui::def_sample_dialog *ui;
     QFileInfoList file_list;
+    QString curr_filename;
     uint cindex;
 
 };

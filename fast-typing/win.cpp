@@ -7,6 +7,8 @@ win::win(QWidget *parent)
 {
     ui->setupUi(this);
 
+    settings = new QSettings("settings.ini");
+
     load_sample_file(get_def_sample_filepath());
     reset_game();
 }
