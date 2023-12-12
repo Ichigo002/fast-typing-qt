@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QSettings>
+#include <QTextEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class win; }
@@ -33,20 +34,31 @@ private slots:
 
     void on_actionHelp_2_triggered();
 
+    void on_lineEdit_input_textChanged(const QString &arg1);
+
 private:
     void load_sample_file(const QString filename);
     void reset_text_view();
     void reset_game();
+    void end_game();
 
-    void load_settings();
-    void save_settings();
-
-    // Change this later when you add QSettings!
-    QString get_def_sample_filepath() { return "samples/default_sample.txt"; }
+    QString get_word(int index);
+    void set_cword_status(bool is_correct);
+    void refresh_text_view();
 
     Ui::win *ui;
-    QString sample_txt;
     QString default_sample_dir = "samples";
+
+    bool running_game;
+    int cword_index; //current word index
+    QStringList sample_text_list; // list of each word in sample
+    QString past_output; // html code coloring last correct or incorrect words.
+    QTextEdit* output;
+
+    QString color_correct = "green";
+    QString color_incorrect = "red";
+    QString color_standart = "white";
+    uint font_size_pt = 36;
 
 private:
     /*Settings section:*/

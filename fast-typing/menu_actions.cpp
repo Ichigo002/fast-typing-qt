@@ -6,9 +6,6 @@
 void win::on_actionBest_Records_triggered()
 {
     //make new window dialog
-    QLabel *timer = findChild<QLabel*>("label_timer");
-
-    timer->setText("9990:00 left");
 }
 
 void win::on_actionText_Settings_triggered()
