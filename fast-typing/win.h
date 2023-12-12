@@ -48,7 +48,8 @@ private:
     QString sample_txt;
     QString default_sample_dir = "samples";
 
-
+private:
+    /*Settings section:*/
     QSettings *settings;
 #define SETT_CURR_SAMPLE_FILE "current_sample_filename"
 

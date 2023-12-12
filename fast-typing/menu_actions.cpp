@@ -31,7 +31,10 @@ void win::on_actionChoose_Sample_triggered()
     defsam_dialog->set_current_file(cfile);
     defsam_dialog->load_all_samples(default_sample_dir);
 
-    defsam_dialog->exec();
+    int c = defsam_dialog->exec();
+
+    if(c == QDialog::Rejected)
+        return;
 
     QFileInfo chf = defsam_dialog->get_chosen_file();
     settings->setValue(SETT_CURR_SAMPLE_FILE, chf.fileName());

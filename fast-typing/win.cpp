@@ -9,7 +9,8 @@ win::win(QWidget *parent)
 
     settings = new QSettings("settings.ini");
 
-    load_sample_file(get_def_sample_filepath());
+    QString filepath = "samples/" + settings->value(SETT_CURR_SAMPLE_FILE).toString();
+    load_sample_file(filepath);
     reset_game();
 }
 
@@ -31,6 +32,10 @@ void win::load_sample_file(const QString filename)
     else
     {
         qDebug() << "Failed to open the file sample: " << filename;
+        qDebug() << "Creating default short sample";
+
+        sample_txt = "Failed to open last chosen sample: " + filename +
+                ". Go to Menu -> Choose Sample. Or you can type this text ;)";
     }
 }
 
