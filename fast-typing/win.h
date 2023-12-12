@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "def_sample_dialog.h"
 #include "text_settings.h"
+#include "about.h"
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
@@ -34,8 +35,6 @@ private slots:
     void on_actionChoose_Sample_triggered();
 
     void on_actionHelp_triggered();
-
-    void on_actionHelp_2_triggered();
 
     void on_lineEdit_input_textChanged(const QString &arg1);
 

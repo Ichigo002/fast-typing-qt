@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     def_sample_dialog.cpp \
     main.cpp \
     menu_actions.cpp \
@@ -16,11 +17,13 @@ SOURCES += \
     win.cpp
 
 HEADERS += \
+    about.h \
     def_sample_dialog.h \
     text_settings.h \
     win.h
 
 FORMS += \
+    about.ui \
     def_sample_dialog.ui \
     text_settings.ui \
     win.ui

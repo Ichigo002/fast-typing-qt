@@ -62,13 +62,10 @@ void win::on_actionChoose_Sample_triggered()
 
 void win::on_actionHelp_triggered()
 {
-    //new info dialog
+    about* dialog = new about();
+
+    dialog->exec();
+
+    delete dialog;
 }
-
-
-void win::on_actionHelp_2_triggered()
-{
-    //new help dialog
-}
-
 

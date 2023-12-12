@@ -157,11 +157,6 @@ void win::on_lineEdit_input_textChanged(const QString &arg1)
     input->setText("");
 }
 
-void win::updateCountdown()
-{
-    qDebug() << "UPDATE";
-}
-
 
 
 

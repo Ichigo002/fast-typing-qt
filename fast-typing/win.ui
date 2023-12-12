@@ -188,7 +188,6 @@ p, li { white-space: pre-wrap; }
      <string>About</string>
     </property>
     <addaction name="actionHelp"/>
-    <addaction name="actionHelp_2"/>
    </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuAbout"/>
@@ -214,15 +213,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionHelp">
    <property name="text">
-    <string>Info</string>
-   </property>
-  </action>
-  <action name="actionHelp_2">
-   <property name="text">
-    <string>Help</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+H</string>
+    <string>Info and Help</string>
    </property>
   </action>
   <action name="actionChoose_Sample">
