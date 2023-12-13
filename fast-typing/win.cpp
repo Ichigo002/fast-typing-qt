@@ -51,7 +51,12 @@ void win::load_color_settings()
 
 void win::reset_game()
 {
+    input->setText("");
+    input->setPlaceholderText("Start Typing");
+
     running_game = false;
+    reset_countdown();
+    refresh_countdown_txt();
     prev_line_cword = 0;
     scrolly = 0;
     scroll_text_view(0);
@@ -59,19 +64,39 @@ void win::reset_game()
     past_output = "";
 
     QString filepath = default_sample_dir + "/" +
-                settings->value(SETT_CURR_SAMPLE_FILE).toString();
+                settings->value(SETT_CURR_SAMPLE_FILE, "samples").toString();
     load_sample_file(filepath);
 
     load_color_settings();
     cword_index = -1;
     refresh_text_view();
     cword_index = 0;
-    input->setText("");
-    input->setPlaceholderText("Start Typing");
+
 
 }
 
-void win::end_game()
+void win::refresh_countdown_txt()
+{
+    int mins = left_time / 60;
+    QString need0 = left_time < 10 ? "0" : "";
+    QString txt =
+            QString::number(mins) + ":" + need0 + QString::number(left_time - mins * 60) + " left";
+    findChild<QLabel*>("label_timer")->setText(txt);
+}
+
+void win::reset_countdown()
+{
+    left_time = start_time;
+    killTimer(timerId);
+}
+
+void win::start_countdown()
+{
+    left_time = start_time;
+    timerId = startTimer(1000, Qt::TimerType::PreciseTimer);
+}
+
+void win::end_game(bool timeover)
 {
     qDebug() << "END GAME!!!";
     reset_game();
@@ -143,9 +168,22 @@ bool win::is_cword_in_next_line()
     }
 }
 
+void win::timerEvent(QTimerEvent *event)
+{
+    left_time--;
+    refresh_countdown_txt();
+    if(left_time <= 0) {
+        end_game(true);
+    }
+}
+
 void win::on_lineEdit_input_textChanged(const QString &arg1)
 {
-    running_game = true;
+    if(!running_game)
+        start_countdown();
+        running_game = true;
+
+
     input->setPlaceholderText("");
 
     if(!arg1.contains(' '))

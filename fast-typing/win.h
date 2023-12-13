@@ -43,7 +43,10 @@ private:
     void reset_text_view();
     void load_color_settings();
     void reset_game();
-    void end_game();
+    void refresh_countdown_txt();
+    void reset_countdown();
+    void start_countdown();
+    void end_game(bool time_over = false);
 
     QString get_word(int index);
     void set_cword_status(bool is_correct);
@@ -54,6 +57,10 @@ private:
 
     Ui::win *ui;
     QString default_sample_dir = "samples";
+
+    int timerId;
+    int left_time;
+    int start_time = 6; // value in seconds;
 
     bool running_game;
     int cword_index; //current word index
@@ -79,6 +86,9 @@ private:
 #define SETT_CORR_COLOR "correct_text_color"
 #define SETT_INCORR_COLOR "incorrect_text_color"
 #define SETT_STD_COLOR "standard_text_color"
+
+protected:
+    void timerEvent(QTimerEvent *event);
 
 };
 #endif // WIN_H
