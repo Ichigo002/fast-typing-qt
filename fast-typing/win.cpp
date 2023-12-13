@@ -42,6 +42,13 @@ void win::load_sample_file(const QString filename)
     sample_text_list = tmps.split(" ");
 }
 
+void win::load_color_settings()
+{
+    color_correct   = settings->value(SETT_CORR_COLOR, "#00FF00").toString();
+    color_incorrect = settings->value(SETT_INCORR_COLOR, "#FF0000").toString();
+    color_standart = settings->value(SETT_STD_COLOR, "#FFFFFF").toString();
+}
+
 void win::reset_game()
 {
     running_game = false;
@@ -55,6 +62,7 @@ void win::reset_game()
                 settings->value(SETT_CURR_SAMPLE_FILE).toString();
     load_sample_file(filepath);
 
+    load_color_settings();
     cword_index = -1;
     refresh_text_view();
     cword_index = 0;

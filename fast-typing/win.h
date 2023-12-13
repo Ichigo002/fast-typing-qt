@@ -41,6 +41,7 @@ private slots:
 private:
     void load_sample_file(const QString filename);
     void reset_text_view();
+    void load_color_settings();
     void reset_game();
     void end_game();
 

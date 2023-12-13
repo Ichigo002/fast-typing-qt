@@ -130,7 +130,7 @@ p, li { white-space: pre-wrap; }
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btn_reset">
        <property name="text">
         <string>Reset</string>
        </property>

@@ -24,9 +24,19 @@ void win::on_actionText_Settings_triggered()
         return;
     }
 
+    dialog->getColors(c_hex, inc_hex, std_hex);
+
     settings->setValue(SETT_CORR_COLOR, c_hex);
     settings->setValue(SETT_INCORR_COLOR, inc_hex);
     settings->setValue(SETT_STD_COLOR, std_hex);
+
+    color_correct = c_hex;
+    color_incorrect = inc_hex;
+    color_standart = std_hex;
+
+    cword_index -= 1;
+    refresh_text_view();
+    cword_index += 1;
 
     delete dialog;
 }
