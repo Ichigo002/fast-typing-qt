@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "def_sample_dialog.h"
 #include "text_settings.h"
+#include "end_game.h"
 #include "about.h"
 #include <QDebug>
 #include <QFile>
@@ -46,7 +47,7 @@ private:
     void refresh_countdown_txt();
     void reset_countdown();
     void start_countdown();
-    void end_game(bool time_over = false);
+    void end_gamef(bool time_over = false);
 
     QString get_word(int index);
     void set_cword_status(bool is_correct);
@@ -58,12 +59,13 @@ private:
     Ui::win *ui;
     QString default_sample_dir = "samples";
 
-    int timerId;
+    int timerId = -1;
     int left_time;
-    int start_time = 6; // value in seconds;
+    int start_time = 6; // value in seconds [shall always be 60s to accurate take measurements]
 
     bool running_game;
     int cword_index; //current word index
+    int passed_words; // amount of passed correctly words
     QStringList sample_text_list; // list of each word in sample
     QString past_output; // html code coloring last correct or incorrect words.
     QTextEdit* output;

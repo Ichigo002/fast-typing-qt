@@ -58,6 +58,7 @@ void win::reset_game()
     reset_countdown();
     refresh_countdown_txt();
     prev_line_cword = 0;
+    passed_words = 0;
     scrolly = 0;
     scroll_text_view(0);
 
@@ -87,7 +88,10 @@ void win::refresh_countdown_txt()
 void win::reset_countdown()
 {
     left_time = start_time;
-    killTimer(timerId);
+    if(timerId != -1) {
+        killTimer(timerId);
+        timerId = -1;
+    }
 }
 
 void win::start_countdown()
@@ -96,9 +100,19 @@ void win::start_countdown()
     timerId = startTimer(1000, Qt::TimerType::PreciseTimer);
 }
 
-void win::end_game(bool timeover)
+void win::end_gamef(bool timeover)
 {
-    qDebug() << "END GAME!!!";
+    reset_countdown();
+
+    int ac  = (static_cast<float>(passed_words) / static_cast<float>(sample_text_list.length())) * 100;
+
+    end_game* dialog = new end_game();
+    dialog->setWPM(cword_index);
+    dialog->setAccuracy(ac);
+    dialog->exec();
+
+    delete dialog;
+
     reset_game();
 }
 
@@ -109,6 +123,7 @@ QString win::get_word(int index)
 
 void win::set_cword_status(bool is_correct)
 {
+    passed_words += is_correct ? 1 : 0;
     QString color = is_correct ? color_correct : color_incorrect;
 
     past_output +=  "<span style=\" font-size:" + QString::number(font_size_pt) +
@@ -173,7 +188,7 @@ void win::timerEvent(QTimerEvent *event)
     left_time--;
     refresh_countdown_txt();
     if(left_time <= 0) {
-        end_game(true);
+        end_gamef(true);
     }
 }
 
@@ -190,7 +205,7 @@ void win::on_lineEdit_input_textChanged(const QString &arg1)
         return;
 
     if(cword_index >= sample_text_list.length())
-        end_game();
+        end_gamef();
 
     set_cword_status(get_word(cword_index) + ' ' == arg1);
     cword_index++;

@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     about.cpp \
     def_sample_dialog.cpp \
+    end_game.cpp \
     main.cpp \
     menu_actions.cpp \
     text_settings.cpp \
@@ -19,12 +20,14 @@ SOURCES += \
 HEADERS += \
     about.h \
     def_sample_dialog.h \
+    end_game.h \
     text_settings.h \
     win.h
 
 FORMS += \
     about.ui \
     def_sample_dialog.ui \
+    end_game.ui \
     text_settings.ui \
     win.ui
 
