@@ -5,6 +5,11 @@
     color: #ccc;
 }
 
+QProgressBar {
+    color: #000;
+    background-color: #333;
+}
+
 QLineEdit {
     background-color: #505050;
     color: #ccc;
