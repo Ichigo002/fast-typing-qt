@@ -104,7 +104,7 @@ void win::end_gamef(bool timeover)
 {
     reset_countdown();
 
-    int ac  = (static_cast<float>(passed_words) / static_cast<float>(sample_text_list.length())) * 100;
+    int ac  = (static_cast<float>(passed_words) / static_cast<float>(cword_index)) * 100;
 
     end_game* dialog = new end_game();
     dialog->setWPM(cword_index);

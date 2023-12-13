@@ -18,6 +18,36 @@
     <widget class="QListWidget" name="listWidget"/>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="toolTip">
+        <string>User gets mixed order of words which is more accurate.</string>
+       </property>
+       <property name="text">
+        <string>Randomize sample</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_2">
+       <property name="toolTip">
+        <string>Uses get non-letter signs from sample if occur. for isntance: ,.&lt;&gt;/*#$!? etc.</string>
+       </property>
+       <property name="text">
+        <string>Use non-letter characters</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -32,9 +62,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
