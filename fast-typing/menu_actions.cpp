@@ -53,6 +53,16 @@ void win::on_actionChoose_Sample_triggered()
     def_sample_dialog *defsam_dialog = new def_sample_dialog();
 
     QString cfile = settings->value(SETT_CURR_SAMPLE_FILE, "").toString();
+
+    bool s_rand = settings->value(SETT_RANDOMIZE_SAMPLE, true).toBool();
+    bool s_nonch = settings->value(SETT_MODE_NON_CHARS, false).toBool();
+    int randn = settings->value(SETT_NUMBER_OF_RAND_WORDS, 175).toInt();
+    SampleSettings ss;
+    ss.number_rand_words = randn;
+    ss.randomize_mode = s_rand;
+    ss.non_letter_mode = s_nonch;
+
+    defsam_dialog->set_sample_settings(ss);
     defsam_dialog->set_current_file(cfile);
     defsam_dialog->load_all_samples(default_sample_dir);
 
@@ -63,6 +73,11 @@ void win::on_actionChoose_Sample_triggered()
 
     QFileInfo chf = defsam_dialog->get_chosen_file();
     settings->setValue(SETT_CURR_SAMPLE_FILE, chf.fileName());
+
+    ss = defsam_dialog->get_current_settings();
+    settings->setValue(SETT_NUMBER_OF_RAND_WORDS, ss.number_rand_words);
+    settings->setValue(SETT_RANDOMIZE_SAMPLE, ss.randomize_mode);
+    settings->setValue(SETT_MODE_NON_CHARS, ss.non_letter_mode);
 
     load_sample_file(chf.filePath());
     reset_game();

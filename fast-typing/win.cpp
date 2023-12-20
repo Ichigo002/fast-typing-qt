@@ -20,7 +20,7 @@ win::~win()
     delete ui;
 }
 
-void win::load_sample_file(const QString filename)
+void win::load_sample_file(const QString &filename)
 {
     QFile file(filename);
     QString tmps;
@@ -39,7 +39,38 @@ void win::load_sample_file(const QString filename)
         tmps = "Failed to open last chosen sample: " + filename +
                 ". Go to Menu -> Choose Sample. Or you can type this text ;)";
     }
-    sample_text_list = tmps.split(" ");
+
+    sample_text_list = sample_settings.non_letter_mode ?
+                non_letters_remover3070(tmps) : tmps.split(" ");
+
+    if(sample_settings.randomize_mode)
+    {
+        sample_text_list = randomize_sample(sample_text_list);
+    }
+}
+
+QStringList win::randomize_sample(const QStringList &sample_l)
+{
+    QStringList r;
+    int sleng = sample_l.length();
+
+    int rv;
+    for (int i = 0; i < sample_settings.number_rand_words; i++)
+    {
+        rv = QRandomGenerator::global()->bounded(0, sleng);
+        r += sample_l[rv];
+    }
+
+    return r;
+}
+
+QStringList win::non_letters_remover3070(const QString &str)
+{
+    QRegularExpression regex("[^a-zA-Z ]");
+    QString s = str;
+    s.replace(regex, "");
+
+    return s.split(" ");
 }
 
 void win::load_color_settings()
@@ -49,8 +80,18 @@ void win::load_color_settings()
     color_standart = settings->value(SETT_STD_COLOR, "#FFFFFF").toString();
 }
 
+void win::load_all_fucking_settings()
+{
+    load_color_settings();
+
+    sample_settings.non_letter_mode = settings->value(SETT_MODE_NON_CHARS, false).toBool();
+    sample_settings.randomize_mode = settings->value(SETT_RANDOMIZE_SAMPLE, true).toBool();
+    sample_settings.number_rand_words = settings->value(SETT_NUMBER_OF_RAND_WORDS, 175).toInt();
+}
+
 void win::reset_game()
 {
+    load_all_fucking_settings();
     input->setText("");
     input->setPlaceholderText("Start Typing");
 
@@ -66,6 +107,8 @@ void win::reset_game()
 
     QString filepath = default_sample_dir + "/" +
                 settings->value(SETT_CURR_SAMPLE_FILE, "samples").toString();
+
+
     load_sample_file(filepath);
 
     load_color_settings();
@@ -79,7 +122,7 @@ void win::reset_game()
 void win::refresh_countdown_txt()
 {
     int mins = left_time / 60;
-    QString need0 = left_time < 10 ? "0" : "";
+    QString need0 = left_time - mins * 60 < 10 ? "0" : "";
     QString txt =
             QString::number(mins) + ":" + need0 + QString::number(left_time - mins * 60) + " left";
     findChild<QLabel*>("label_timer")->setText(txt);

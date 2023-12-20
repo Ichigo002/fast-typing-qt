@@ -13,6 +13,9 @@
 #include <QTextEdit>
 #include <QScrollBar>
 #include <QFontMetrics>
+#include <QRandomGenerator>
+#include <QRegularExpression>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class win; }
@@ -40,9 +43,12 @@ private slots:
     void on_lineEdit_input_textChanged(const QString &arg1);
 
 private:
-    void load_sample_file(const QString filename);
+    void load_sample_file(const QString &filename);
+    QStringList randomize_sample(const QStringList &sample_l);
+    QStringList non_letters_remover3070(const QString &str);
     void reset_text_view();
     void load_color_settings();
+    void load_all_fucking_settings();
     void reset_game();
     void refresh_countdown_txt();
     void reset_countdown();
@@ -61,7 +67,9 @@ private:
 
     int timerId = -1;
     int left_time;
-    int start_time = 6; // value in seconds [shall always be 60s to accurate take measurements]
+    int start_time = 60; // value in seconds [shall always be 60s to accurate take measurements]
+
+    SampleSettings sample_settings;
 
     bool running_game;
     int cword_index; //current word index
@@ -84,6 +92,9 @@ private:
     /*Settings section:*/
     QSettings *settings;
 #define SETT_CURR_SAMPLE_FILE "current_sample_filename"
+#define SETT_RANDOMIZE_SAMPLE "randomize_sample_file"
+#define SETT_MODE_NON_CHARS   "mode_non_letter_characters"
+#define SETT_NUMBER_OF_RAND_WORDS "amount_of_random_sample"
 
 #define SETT_CORR_COLOR "correct_text_color"
 #define SETT_INCORR_COLOR "incorrect_text_color"

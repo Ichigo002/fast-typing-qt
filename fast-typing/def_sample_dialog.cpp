@@ -25,6 +25,22 @@ QFileInfo def_sample_dialog::get_chosen_file()
     return file_list[cindex];
 }
 
+SampleSettings def_sample_dialog::get_current_settings()
+{
+    SampleSettings s;
+    s.randomize_mode = findChild<QCheckBox*>("checkBox_randomize")->isChecked();
+    s.non_letter_mode = findChild<QCheckBox*>("checkBox_non")->isChecked();
+    s.number_rand_words = findChild<QSpinBox*>("spinBox")->value();
+    return s;
+}
+
+void def_sample_dialog::set_sample_settings(const SampleSettings &s)
+{
+    findChild<QCheckBox*>("checkBox_randomize")->setChecked(s.randomize_mode);
+    findChild<QCheckBox*>("checkBox_non")->setChecked(s.non_letter_mode);
+    findChild<QSpinBox*>("spinBox")->setValue(s.number_rand_words);
+}
+
 void def_sample_dialog::on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     cindex = current->data(Qt::UserRole).toUInt();
